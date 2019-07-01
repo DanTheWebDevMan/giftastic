@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>HW #6: Giftastic</title>
+
+    <link rel= "stylesheet" href="assets/css/reset.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel= "stylesheet" href="assets/css/style.css">
+
+
+</head>
+<body>
+    <!-- bootstrap jumpotron -->
+    <div class="jumbotron">
+            <h1 class="display-4">Gif-tastic: Superhero Edition</h1>
+            <hr class="my-4">
+            <p>Click on a button to see superhero gifs! Or search for your own superhero!</p>
+        <div class = "row">
+                <div class="buttons-view"></div>
+            </div>
+                
+    <div class = "row">
+        <div class="col-lg-9 container-fluid">
+        <!-- Info from API call will be added here -->
+                <div id="hero-view"></div>
+            </div>
+
+        <!-- Div for the form and submit button-->
+        <div class="col-lg-3">
+            <form id="hero-form">
+            <label for="hero-input">Search for another Super Hero!</label>
+            <input type="text" class="form-control col-12" id="hero-input"><br>
+            <input class="btn btn-warning" id="add-hero" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+    
+</body>
+<script type="text/javascript" src="assets/javascript/gif.js"></script>
+
+</html>
