@@ -26,26 +26,26 @@
                 <div class="heroes"></div>
             </div>
                 
-    <div class = "row">
-        <div class="col-xs-9 container-fluid">
-        <!-- Info from API call will be added here -->
-                <div id="hero-view"></div>
-            </div>
+     <!-- Rendered Buttons will get Dumped Here  -->
+     <div id="buttons-view"></div>
 
-        <!-- Div for the form and submit button-->
-        <div class="col-xs-3">
-            <form id="hero-form">
-            <label for="hero-input">Search for another Super Hero!</label>
-            <input type="text" class="form-control col-12" id="hero-input"><br>
-            <input class="btn btn-warning" id="add-hero" type="submit" value="Submit">
-            </form>
-        </div>
-    </div>
-</div>
+     <form id="hero-form">
+       <label for="hero-input">Add more Heroes!</label>
+       <input type="text" id="hero-input">
+       <br>
+ 
+       <!-- Button triggers new movie to be added -->
+       <input id="add-hero" type="submit" value="Add more Heroes!">
+     </form>
+ 
+     <!-- Movies will Get Dumped Here -->
+     <div id="heroes-view"></div>
+ 
 </div>
     
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/javascript/gif.js"></script>
 
 </html>
