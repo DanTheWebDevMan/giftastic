@@ -87,18 +87,28 @@ $(document).ready(function() {
                     }
                 });
             })
-    
     })
 
     $("#submit").on("click", function (event) {
+
+    // the default action of the event will not be triggered.
+        event.preventDefault ();
     //Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
+            var a = $("<button>");
+            a.attr("class", "heroBtn btn-primary btn");
+            a.attr("character-data", $("#input").val());
+            a.text($("#input").val());
+
+            $("#buttons").append(a);
+    });
 
     // please create a variable for creating button
     // give the variable attributes that are same as already existing iron man button.
     // Have newly created buttons to append to the existing buttons.
-    });
     
-        
+    
+    // Append for newly created buttons
+
 
 
 
