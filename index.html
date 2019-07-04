@@ -18,30 +18,29 @@
 </head>
 
 <body>
-    <!-- bootstrap jumpotron -->
-    <div class="jumbotron">
-        <h1 class="title">Gif-tastic: Superhero Edition</h1>
+    <div class="container">
 
-        <hr>
-
-        <p>Click on a button to see superhero gifs! Or search for your own superhero!</p>
+        <!-- bootstrap jumpotron -->
+        <div class="jumbotron">
+            <h1 class="title">Gif-tastic: Superhero Edition</h1>
+            <hr>
+            <p>Click on a button to see superhero gifs! Or search for your own superhero!</p>
+            
+            <form>
+                <input type="text" class="searchInput" id="input" placeholder="Search to add more heroes">
         
-        <form id="hero-form">
-            <input type="text" id="hero-input" placeholder="search to add more heroes">
-            <br>
-    
-            <!-- Button triggers new movie to be added -->
-            <input id="add-hero" type="submit"></input>
-        </form>
+                <!-- Button triggers new movie to be added -->
+                <input id="submit" type="submit"></input>
+            </form>
 
-        <div id="buttons">
-            <button class="heroBtn btn-primary btn" character-data="ironman">Iron Man</button>
+            <div id="buttons">
+                <button class="heroBtn btn-primary btn" character-data="ironman">Iron Man</button>
+            </div>
         </div>
+
+        <div id="gifs-appear-here"></div>
+        <!-- Gif Images will Get Dumped Here -->
     </div>
-
-
-    <!-- Gif Images will Get Dumped Here -->
-    <div id="heroes-view"></div>
 
     <script type="text/javascript" src="assets/javascript/gif.js"></script>
     
