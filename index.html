@@ -1,51 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>HW #6: Giftastic</title>
-
-    <link rel= "stylesheet" href="assets/css/reset.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel= "stylesheet" href="assets/css/reset.css">
     <link rel= "stylesheet" href="assets/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <title>HW #6: Giftastic</title>
 </head>
+
 <body>
     <!-- bootstrap jumpotron -->
     <div class="jumbotron">
-            <h1 class="display-4">Gif-tastic: Superhero Edition</h1>
-            <hr class="my-4">
-            <p>Click on a button to see superhero gifs! Or search for your own superhero!</p>
-        <div class = "row">
-                <div class="heroes"></div>
-            </div>
-                
-     <!-- Rendered Buttons will get Dumped Here  -->
-     <div id="buttons-view"></div>
+        <h1 class="title">Gif-tastic: Superhero Edition</h1>
 
-     <form id="hero-form">
-       <label for="hero-input">Add more Heroes!</label>
-       <input type="text" id="hero-input">
-       <br>
- 
-       <!-- Button triggers new movie to be added -->
-       <input id="add-hero" type="submit" value="Add more Heroes!">
-     </form>
- 
-     <!-- Movies will Get Dumped Here -->
-     <div id="heroes-view"></div>
- 
-</div>
+        <hr>
+
+        <p>Click on a button to see superhero gifs! Or search for your own superhero!</p>
+        
+        <form id="hero-form">
+            <input type="text" id="hero-input" placeholder="search to add more heroes">
+            <br>
+    
+            <!-- Button triggers new movie to be added -->
+            <input id="add-hero" type="submit"></input>
+        </form>
+
+        <div id="buttons">
+            <button class="heroBtn btn-primary btn" character-data="ironman">Iron Man</button>
+        </div>
+    </div>
+
+
+    <!-- Gif Images will Get Dumped Here -->
+    <div id="heroes-view"></div>
+
+    <script type="text/javascript" src="assets/javascript/gif.js"></script>
     
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/javascript/gif.js"></script>
 
 </html>
