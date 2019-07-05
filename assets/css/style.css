@@ -1,0 +1,30 @@
+body {
+    background: url(https://cdn.shopify.com/s/files/1/1660/9891/products/HTB1PHlnHeuSBuNjSsplq6ze8pXa0_1024x1024.jpg?v=1533294231);
+    font-family: 'Marvel', sans-serif;
+    color: white;
+    font-size: 24px;
+}
+
+.jumbotron {
+    opacity: .9;
+    text-align: center;
+    background-color: black;
+    font:black;
+    font-size: 28px;
+}
+
+h1 {
+    color:red;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.heroBtn {
+    background-color: red;
+    color: white;
+    margin: 5px;
+}
+
+#gifs {
+    border: yellowgreen 5px;
+}

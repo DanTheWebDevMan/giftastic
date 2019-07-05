@@ -25,8 +25,11 @@ $(document).ready(function() {
 
         //Function to display info on the topics by calling an API and retrieving the info 
         var heroes = $(this).attr("character-data");
-        var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + heroes + '&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10';
 
+        var queryURL = "https://api.giphy.com/v1/gifs/search?" +
+                   "q=" + heroes +
+                   "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0" +
+                   "&limit=" + 10;
         // Creating an AJAX call for the specific hero button being clicked
         $.ajax({
             url: queryURL,
