@@ -16,68 +16,79 @@ Make a function call that takes each topic in the array and remakes the buttons 
 
 // list of superheroes that will be loaded at start of page
 
+
 var superHeroes = ['Superman', 'Aquaman', 'Spiderman', 'Batman', 'Wonder Woman', 'Thor', 'Hulk', 'Black Panther', 'Iron Man'];
-//var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superHeroes + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superHeroes + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
+
 
 function displayHeroInfo() {
-    var hero = $(this).attr("character-data")
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&" + "limit=10";
+    var hero = $(this).attr("character-data");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0" + "&limit=10";
 
     $.ajax({
         url: queryURL,
         method: "GET"
     })
-        .then(function(response){
-            var results = response.data;
-            var heroDiv = $("<div class= 'hero'>");
-            //var heroDiv = $("<div>");
-            var rating = response.rating;
-            var pOne = $("<p>").text("Rating: " + rating);
-            heroDiv.append(pOne);
+    .then(function(response){
+        var results = response.data;
+            console.log(response);
+        var heroDiv = $("<div class= 'hero'>");
+        //var heroDiv = $("<div>");
+        var rating = response.rating;
+        var pOne = $("<p>").text("Rating: " + rating);
+        heroDiv.append(pOne);
 
-            var imgGif = results[i].images.fixed_height_still.url
-            var heroImage = $("<img>");
-            heroImage.attr("src", imgGif);
-            // copied this from the class activities
-            heroImage.attr({
+        // Creating an image tag for the gifs
+        var heroImage = $("<img>");
+        heroImage.attr("src", results[i].images.fixed_height_still.url)
+        //This gives rating information before the gif image.
+        heroDiv.prepend(pOne);
+        heroDiv.prepend(heroImage);
+
+        // copied this from the class activities
+        heroImage.attr({
                 "data-state": "still",
                 "data-still": results[i].images.fixed_height_still.url,
                 "data-animate": results[i].images.fixed_height.url,
                 class: "gif"
-            });
+                    });
+                }); 
+        };  
 
-            // This gives rating information before the gif image.
-            heroDiv.prepend(pOne);
-            heroDiv.prepend(heroImage);
-
-            $("#gifs-appear-here").prepend(heroDiv);
-            });
-    }
-
+//function for diplaying movie data
     function renderButtons() {
         $("#buttons-view").empty();
-        for (var i =0; i < superHeroes.length; i ++) {
+        for (var i = 0; i < superHeroes.length; i++) {
             var a = $("<button>");
             a.addClass("heroBtn");
             a.attr("character-data", superHeroes[i]);
             a.text(superHeroes[i]);
             $("#buttons-view").append(a);
             }
-        }
-
+        } 
+// This function handles events where a hero button is clicked
     $("#add-hero").on("click", function(event) {
         event.preventDefault()
-        var hero = $("#add-hero").val().trim();
+        var hero = $("#buttons").val().trim();
         superHeroes.push(hero);
         renderButtons();
-    });
+        });
 
     $(document).on("click", ".heroBtn", displayHeroInfo);
     renderButtons();
+
+
+//Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
+      var a = $("<button>");
+        a.attr("class", "heroBtn btn-primary btn");
+        a.attr("character-data", $("#input").val());
+        a.text($("#input").val());
+
+        $("#buttons").append(a);
         
-/*function renderButtons(){
+
+   function renderButtons(){
     $("#buttons").empty(); 
-    var queryURL;
     for (var i = 0; i < superHeroes.length; i++) {
         var a = $("<button>");
         a.addClass("hero");
@@ -86,12 +97,12 @@ function displayHeroInfo() {
         $("#buttons").append(a);
         }
     }
-        
+
 $(document).on("click", function() {
 //function displayHeroInfo() {
     //Function to display info on the topics by calling an API and retrieving the info 
-    var heroes = $(this).attr("character-data");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + heroes + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
+    var hero = $(this).attr("response-data");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
     // Creating an AJAX call for the specific hero button being clicked
     $.ajax({
         url: queryURL,
@@ -136,7 +147,7 @@ $(document).on("click", function() {
                 $("#gifs-appear-here").prepend(heroDiv);
             }
 
-            // function to turn static gifs into animated once on clicks//
+         //function to turn static gifs into animated once on clicks//
             $(".gif").on("click", function() {
             //Check if the variable state is equal to 'still',
             // then update the src attribute of this image to it's data-animate value,
@@ -150,13 +161,15 @@ $(document).on("click", function() {
                     $(this).attr("data-state", "still");
                 }
             });
+        });
+    });
         
 
-$("#submit").on("click", function (event) {
+/*$("#submit").on("click", function (event) {
 
-// the default action of the event will not be triggered.
+ //the default action of the event will not be triggered.
     event.preventDefault ();
-//Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
+/*Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
         var a = $("<button>");
         a.attr("class", "heroBtn btn-primary btn");
         a.attr("character-data", $("#input").val());
@@ -166,4 +179,4 @@ $("#submit").on("click", function (event) {
         });
     });
 });
-// give the variable attributes that are same as already existing iron man button. */
+// give the variable attributes that are same as already existing iron man button.  */
