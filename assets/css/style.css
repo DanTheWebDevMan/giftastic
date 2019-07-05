@@ -20,11 +20,21 @@ h1 {
 }
 
 .heroBtn {
-    background-color: red;
+    background-color: blue;
     color: white;
     margin: 5px;
+    font-size: 24px;
+    font-family: 'Marvel', sans-serif;
 }
 
 #gifs {
     border: yellowgreen 5px;
+}
+
+button.hero {
+    background-color: red;
+    color: white;
+    margin: 5px;
+    font-family: 'Marvel', sans-serif;
+
 }
