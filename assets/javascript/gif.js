@@ -22,104 +22,94 @@ var superHeroes = ['Superman', 'Aquaman', 'Spiderman', 'Batman', 'Wonder Woman',
 
 // displayMovieInfo function re-renders the HTML to display the appropriate content
 function displayHeroInfo() {
-    var hero = $(this).attr("hero-data");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0" + "&limit=10";
+    var hero = $(this).attr("hero-name");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero+ "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
 
+// Creating an AJAX call for the specific movie button being clicked
     $.ajax({
         url: queryURL,
         method: "GET"
     })
     .then(function(response){
+        var results = response.data;
         // Creating a div to hold the movie
         var heroDiv = $("<div class='hero'>");
         //var heroDiv = $("<div>");
         // Storing the rating data
         var rating = response.rating;
+            console.log(response);
         // Creating an element to have the rating displayed
-        var pOne = $("<p>").text("Rating: " + rating);
+        var pOne = $("<div>").text("Rating: " + rating);
         // Displaying the rating
         heroDiv.append(pOne);
-        // Putting the entire movie above the previous movies
+        
         $("#gifs-appear-here").prepend(heroDiv);
             }); 
         };  
 
-//function for diplaying hero data
-    function renderButtons() {
-        // Deleting the movies prior to adding new movies
-        // (this is necessary otherwise you will have repeat buttons)
-        $("#buttons").empty();
-        // Looping through the array of movies
-        for (var i = 0; i < superHeroes.length; i++) {
-            // Then dynamicaly generating buttons for each hero in the array
-            //This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-            var a = $("<button>");
-            // Adding a class of movie-btn to our button
-            a.addClass("heroBtn");
-            // Adding a data-attribute
-            a.attr("hero-data", superHeroes[i]);
-            // Providing the initial button text
-            a.text(superHeroes[i]);
-            // Adding the button to the buttons-view div
-            $("#buttons").append(a);
-            }
+//function for diplaying hero data - **GOOD HERE**
+function renderButtons() {
+    // Deleting the heroes prior to adding new heroes
+    // (this is necessary otherwise you will have repeat buttons)
+    $("#buttons").empty();
+    // Looping through the array of heroes
+    for (var i = 0; i < superHeroes.length; i++) {
+        // Then dynamicaly generating buttons for each hero in the array
+        var heroDiv = $("<div>");
+        //This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+        var a = $("<button>");
+        // Adding a class of movie-btn to our button
+        a.addClass("heroBtn");
+        // Adding a data-attribute
+        a.attr("hero-name", superHeroes[i]);
+        // Providing the initial button text
+        a.text(superHeroes[i]);
+        // Adding the button to the buttons-view div
+        $("#buttons").append(a);
+      
         }
-            // This function handles events where a hero button is clicked
-    $("#add-hero").on("click", function(event) {
-        event.preventDefault()
-        // This line grabs the input from the textbox
-        var hero = $("#input").val().trim();
-        // Adding movie from the textbox to our array
-        superHeroes.push(hero);
-        // Calling renderButtons which handles the processing of our her array
-        renderButtons();
-        });
+    }
 
-    // Adding a click event listener to all elements with a class of ""
-    $(document).on("click", "heroBtn", displayHeroInfo);
+    
+// This function handles events where a hero button is clicked
+$("#add-hero").on("click", function(event) {
+    event.preventDefault()
+    // This line grabs the input from the textbox
+    var hero = $("#input").val().trim();
+    // Adding movie from the textbox to our array
+    superHeroes.push(hero);
+    // Calling renderButtons which handles the processing of our her array
+    renderButtons();
+    });
+
+// Adding a click event listener to all elements with a class of ""
+$(document).on("click", "#add-hero", displayHeroInfo);
     renderButtons();
 
-              /* Creating an image tag for the gifs
-            //var heroImage = $("<img>");
-            // Adding the button to the buttons-view div
-            //heroImage.attr("src", results[i].images.fixed_height_still.url)
-
-             //This gives rating information before the gif image.
-            heroDiv.prepend(pOne);
-            heroDiv.prepend(heroImage);
-            var results = response.data;
-            console.log(response);
-            heroDiv.attr({
-                "data-state": "still",
-                "data-still": results[i].images.fixed_height_still.url,
-                "data-animate": results[i].images.fixed_height.url,
-                class: "gif"
-                }); 
-            }
-        } 
-        */
-
+         
+    
+        
 
 
 //Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
-      var a = $("<button>");
-        a.attr("class", "heroBtn");
-        a.attr("hero-data", $(".input").val());
-        a.text($("#input").val());
+     // var a = $("<button>");
+      //  a.attr("class", "heroBtn");
+       // a.attr("hero-data", $(".input").val());
+       // a.text($("#input").val());
 
-        $("#buttons").append(a);
+        //$("#buttons").append(a);
         
 
-   function renderButtons(){
-    $("#buttons").empty(); 
-    for (var i = 0; i < superHeroes.length; i++) {
-        var a = $("<button>");
-        a.addClass("hero");
-        a.attr("hero-data", superHeroes[i]);
-        a.text(superHeroes[i]);
-        $("#buttons").append(a);
-        }
-    }
+   //function renderButtons(){
+  //  $("#buttons").empty(); 
+   // for (var i = 0; i < superHeroes.length; i++) {
+    //    var a = $("<button>");
+     //   a.addClass("hero");
+     //   a.attr("hero-data", superHeroes[i]);
+     //   a.text(superHeroes[i]);
+     //   $("#buttons").append(a);
+     //   }
+   // }
     
 /*
 $(document).on("click", function() {
