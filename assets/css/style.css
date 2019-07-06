@@ -38,3 +38,7 @@ button.hero {
     font-family: 'Marvel', sans-serif;
 
 }
+
+.hero {
+display: inline-block;
+}

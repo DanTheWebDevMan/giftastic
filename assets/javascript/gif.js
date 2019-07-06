@@ -23,32 +23,44 @@ var superHeroes = ['Superman', 'Aquaman', 'Spiderman', 'Batman', 'Wonder Woman',
 // displayMovieInfo function re-renders the HTML to display the appropriate content
 function displayHeroInfo() {
     var hero = $(this).attr("hero-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero+ "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
-
+    console.log(this)
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero +"&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
+      $("#gifs-appear-here").empty();
 // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
         url: queryURL,
         method: "GET"
     })
     .then(function(response){
+
+        var results = response.data;
         // Creating a div to hold the movie
-        var heroDiv = $("<div class='hero'>");
+        //var heroDiv = $("<div class='hero'>");
         //var heroDiv = $("<div>");
         // Storing the rating data
-        var rating = response.rating;
+        //var rating = response.rating;
             console.log(response);
         // Creating an element to have the rating displayed
-        var pOne = $("<div>").text("Rating: " + rating);
+        //var pOne = $("<div>").text("Rating: " + rating);
         // Displaying the rating
-        heroDiv.append(pOne);
-        var results = response.data;
-        var imgGIF = results[0].images.fixed_height_still.url;
+       // heroDiv.append(pOne);
 
+        for (var i = 0; i < results.length; i++) {
+         console.log(results[i]);
+            // var imgGIF = results.images.fixed_height_still.url;
+            var rating = results[i].rating;
+            var pOne = $("<div>").text("Rating: " + rating);
+            var heroDiv = $("<div class='hero'>");
+            heroDiv.append(pOne);
+        var imgGIF = results[i].images.fixed_height_still.url;
         var image = $("<img>").attr("src", imgGIF);
+            heroDiv.append(image);
+        
         // Putting the entire movie above the previous movies
         $("#gifs-appear-here").append(heroDiv);
-            }); 
-        };  
+            }; 
+        });  
+    };
 
 //function for diplaying hero data - **GOOD HERE**
 function renderButtons() {
@@ -83,10 +95,12 @@ $("#add-hero").on("click", function(event) {
     });
 
     // Adding a click event listener to all elements with a class of ""
-    $(document).on("click", "#add-hero", displayHeroInfo);
+    $(document).on("click", ".heroBtn", displayHeroInfo);
     renderButtons();
 
-// create another for loop to itertate the ajax call to iteray throught the super hero array and add the new input//
+
+    
+// create another for loop to itertate the ajax call to iteray throught the hero array and add the new input//
 
               /* Creating an image tag for the gifs
             //var heroImage = $("<img>");
@@ -170,7 +184,7 @@ function displayHeroInfo() {
                 $("#gifs-appear-here").prepend(heroDiv);
             }
          //function to turn static gifs into animated once on clicks//
-            $(".gif").on("click", function() {
+            $(".hero").on("click", function() {
             //Check if the variable state is equal to 'still',
             // then update the src attribute of this image to it's data-animate value,
             // and update the data-state attribute to 'animate'.
