@@ -14,15 +14,15 @@ Make a function call that takes each topic in the array and remakes the buttons 
 */
 //api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0
 
-// list of superheroes that will be loaded at start of page
 
-
+// Initial array of movies
 var superHeroes = ['Superman', 'Aquaman', 'Spiderman', 'Batman', 'Wonder Woman', 'Thor', 'Hulk', 'Black Panther', 'Iron Man'];
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superHeroes + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
 
+// var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superHeroes + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
 
+// displayMovieInfo function re-renders the HTML to display the appropriate content
 function displayHeroInfo() {
-    var hero = $(this).attr("character-data");
+    var hero = $(this).attr("hero-data");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0" + "&limit=10";
 
     $.ajax({
@@ -30,58 +30,81 @@ function displayHeroInfo() {
         method: "GET"
     })
     .then(function(response){
-        var results = response.data;
-            console.log(response);
-        var heroDiv = $("<div class= 'hero'>");
+        // Creating a div to hold the movie
+        var heroDiv = $("<div class='hero'>");
         //var heroDiv = $("<div>");
+        // Storing the rating data
         var rating = response.rating;
+        // Creating an element to have the rating displayed
         var pOne = $("<p>").text("Rating: " + rating);
+        // Displaying the rating
         heroDiv.append(pOne);
+        // Putting the entire movie above the previous movies
+        $("#gifs-appear-here").prepend(heroDiv);
+            }); 
+        };  
 
-        // Creating an image tag for the gifs
-        var heroImage = $("<img>");
-        heroImage.attr("src", results[i].images.fixed_height_still.url)
-        //This gives rating information before the gif image.
-        heroDiv.prepend(pOne);
-        heroDiv.prepend(heroImage);
+//function for diplaying hero data
+    function renderButtons() {
+        // Deleting the movies prior to adding new movies
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#buttons").empty();
+        // Looping through the array of movies
+        for (var i = 0; i < superHeroes.length; i++) {
+            // Then dynamicaly generating buttons for each hero in the array
+            //This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+            var a = $("<button>");
+            // Adding a class of movie-btn to our button
+            a.addClass("heroBtn");
+            // Adding a data-attribute
+            a.attr("hero-data", superHeroes[i]);
+            // Providing the initial button text
+            a.text(superHeroes[i]);
+            // Adding the button to the buttons-view div
+            $("#buttons").append(a);
+            }
+        }
+            // This function handles events where a hero button is clicked
+    $("#add-hero").on("click", function(event) {
+        event.preventDefault()
+        // This line grabs the input from the textbox
+        var hero = $("#input").val().trim();
+        // Adding movie from the textbox to our array
+        superHeroes.push(hero);
+        // Calling renderButtons which handles the processing of our her array
+        renderButtons();
+        });
 
-        // copied this from the class activities
-        heroImage.attr({
+    // Adding a click event listener to all elements with a class of ""
+    $(document).on("click", "heroBtn", displayHeroInfo);
+    renderButtons();
+
+              /* Creating an image tag for the gifs
+            //var heroImage = $("<img>");
+            // Adding the button to the buttons-view div
+            //heroImage.attr("src", results[i].images.fixed_height_still.url)
+
+             //This gives rating information before the gif image.
+            heroDiv.prepend(pOne);
+            heroDiv.prepend(heroImage);
+            var results = response.data;
+            console.log(response);
+            heroDiv.attr({
                 "data-state": "still",
                 "data-still": results[i].images.fixed_height_still.url,
                 "data-animate": results[i].images.fixed_height.url,
                 class: "gif"
-                    });
                 }); 
-        };  
-
-//function for diplaying movie data
-    function renderButtons() {
-        $("#buttons-view").empty();
-        for (var i = 0; i < superHeroes.length; i++) {
-            var a = $("<button>");
-            a.addClass("heroBtn");
-            a.attr("character-data", superHeroes[i]);
-            a.text(superHeroes[i]);
-            $("#buttons-view").append(a);
             }
         } 
-// This function handles events where a hero button is clicked
-    $("#add-hero").on("click", function(event) {
-        event.preventDefault()
-        var hero = $("#buttons").val().trim();
-        superHeroes.push(hero);
-        renderButtons();
-        });
+        */
 
-    $(document).on("click", ".heroBtn", displayHeroInfo);
-    renderButtons();
 
 
 //Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
       var a = $("<button>");
-        a.attr("class", "heroBtn btn-primary btn");
-        a.attr("character-data", $("#input").val());
+        a.attr("class", "heroBtn");
+        a.attr("hero-data", $(".input").val());
         a.text($("#input").val());
 
         $("#buttons").append(a);
@@ -92,14 +115,15 @@ function displayHeroInfo() {
     for (var i = 0; i < superHeroes.length; i++) {
         var a = $("<button>");
         a.addClass("hero");
-        a.attr("character-data", superHeroes[i]);
+        a.attr("hero-data", superHeroes[i]);
         a.text(superHeroes[i]);
         $("#buttons").append(a);
         }
     }
-
+    
+/*
 $(document).on("click", function() {
-//function displayHeroInfo() {
+function displayHeroInfo() {
     //Function to display info on the topics by calling an API and retrieving the info 
     var hero = $(this).attr("response-data");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=74wQm2acCPuZG1EbjwF3lqomtwdorPe0&limit=10";
@@ -112,41 +136,31 @@ $(document).on("click", function() {
         var results = response.data;
         console.log(response);
         // WIth the variable results, we can get the data from jquery library to the response function.
-
         $("#gifs-appear-here").empty();
         // This clears out where the gifs show after clicking heroBtn.
-
         for (var i = 0; i < results.length; i++) {
-
             // Creating a div to hold the hero gifs.
             var heroDiv = $("<div>");
-
             // Storing the rating data
             var rating = results[i].rating;
-
             // Creating an element to have the rating displayed
             var pOne = $("<p>").text("Rating: " + rating);
-
             // Creating an image tag for the gifs
             var heroImage = $("<img>");
-
             heroImage.attr("src", results[i].images.fixed_height_still.url)
-
             // I copied this from the class activities
             heroImage.attr({
                 "data-state": "still",
                 "data-still": results[i].images.fixed_height_still.url,
                 "data-animate": results[i].images.fixed_height.url,
                 class: "gif"
-            });
-
+            }); 
+        
                 // This gives rating information before the gif image.
                 heroDiv.prepend(pOne);
                 heroDiv.prepend(heroImage);
-
                 $("#gifs-appear-here").prepend(heroDiv);
             }
-
          //function to turn static gifs into animated once on clicks//
             $(".gif").on("click", function() {
             //Check if the variable state is equal to 'still',
@@ -160,16 +174,14 @@ $(document).on("click", function() {
                     $(this).attr('src', $(this).attr("data-animate"));
                     $(this).attr("data-state", "still");
                 }
-            });
+            }); 
         });
-    });
+    };
         
-
-/*$("#submit").on("click", function (event) {
-
+$("#submit").on("click", function (event) {
  //the default action of the event will not be triggered.
     event.preventDefault ();
-/*Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
+//Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
         var a = $("<button>");
         a.attr("class", "heroBtn btn-primary btn");
         a.attr("character-data", $("#input").val());
@@ -177,6 +189,5 @@ $(document).on("click", function() {
 
         $("#buttons").append(a);
         });
-    });
-});
+
 // give the variable attributes that are same as already existing iron man button.  */
