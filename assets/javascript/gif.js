@@ -31,7 +31,6 @@ function displayHeroInfo() {
         method: "GET"
     })
     .then(function(response){
-        var results = response.data;
         // Creating a div to hold the movie
         var heroDiv = $("<div class='hero'>");
         //var heroDiv = $("<div>");
@@ -42,8 +41,12 @@ function displayHeroInfo() {
         var pOne = $("<div>").text("Rating: " + rating);
         // Displaying the rating
         heroDiv.append(pOne);
-        
-        $("#gifs-appear-here").prepend(heroDiv);
+        var results = response.data;
+        var imgGIF = results[0].images.fixed_height_still.url;
+
+        var image = $("<img>").attr("src", imgGIF);
+        // Putting the entire movie above the previous movies
+        $("#gifs-appear-here").append(heroDiv);
             }); 
         };  
 
@@ -55,7 +58,6 @@ function renderButtons() {
     // Looping through the array of heroes
     for (var i = 0; i < superHeroes.length; i++) {
         // Then dynamicaly generating buttons for each hero in the array
-        var heroDiv = $("<div>");
         //This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
         var a = $("<button>");
         // Adding a class of movie-btn to our button
@@ -66,11 +68,9 @@ function renderButtons() {
         a.text(superHeroes[i]);
         // Adding the button to the buttons-view div
         $("#buttons").append(a);
-      
         }
     }
 
-    
 // This function handles events where a hero button is clicked
 $("#add-hero").on("click", function(event) {
     event.preventDefault()
@@ -82,13 +82,31 @@ $("#add-hero").on("click", function(event) {
     renderButtons();
     });
 
-// Adding a click event listener to all elements with a class of ""
-$(document).on("click", "#add-hero", displayHeroInfo);
+    // Adding a click event listener to all elements with a class of ""
+    $(document).on("click", "#add-hero", displayHeroInfo);
     renderButtons();
 
-         
-    
-        
+// create another for loop to itertate the ajax call to iteray throught the super hero array and add the new input//
+
+              /* Creating an image tag for the gifs
+            //var heroImage = $("<img>");
+            // Adding the button to the buttons-view div
+            //heroImage.attr("src", results[i].images.fixed_height_still.url)
+
+             //This gives rating information before the gif image.
+            heroDiv.prepend(pOne);
+            heroDiv.prepend(heroImage);
+            var results = response.data;
+            console.log(response);
+            heroDiv.attr({
+                "data-state": "still",
+                "data-still": results[i].images.fixed_height_still.url,
+                "data-animate": results[i].images.fixed_height.url,
+                class: "gif"
+                }); 
+            }
+        } 
+        */
 
 
 //Here, All you need to do is creating a function for submit button, so new buttons appear when you search for something. 
