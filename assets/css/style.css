@@ -27,8 +27,9 @@ h1 {
     font-family: 'Marvel', sans-serif;
 }
 
-#gifs {
-    border: yellowgreen 5px;
+img {
+    border-color: yellowgreen 5px;
+    margin: 10px;
 }
 
 button.hero {
@@ -39,6 +40,6 @@ button.hero {
 
 }
 
-.hero {
+div.gif {
 display: inline-block;
 }
