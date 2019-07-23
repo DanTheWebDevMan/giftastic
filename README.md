@@ -17,3 +17,6 @@ In this assignment, you'll use the GIPHY API to make a dynamic web page that pop
 
 6. Add a form to your page that takes a value from a user input box and adds it to your `topics` array. Then make a function call that takes each topic in the array and remakes the buttons on the page.
 
+https://dannielzelaya.github.io/giftastic/
+
+Only portion of the project missing is animating the gifs on click event.
